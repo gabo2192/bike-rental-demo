@@ -1,6 +1,8 @@
 import { BikeList } from "@/components/bike-list";
-import bikes from "@/data/bikes";
+import getBikes from "@/data/bikes";
 
-export default function Home() {
+export default async function Home() {
+  const bikes = await getBikes();
+
   return <BikeList bikes={bikes} />;
 }

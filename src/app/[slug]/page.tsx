@@ -1,19 +1,17 @@
-"use client";
 import { BikeForm } from "@/components/bike-form";
-import bikes from "@/data/bikes";
+import getBikes from "@/data/bikes";
 import Image from "next/image";
 import Link from "next/link";
 
 interface PageProps {
-  children: React.ReactNode;
   params: {
     slug: string;
   };
 }
 
-const Page: React.FC<PageProps> = ({ params }) => {
+export default async function Page({ params }: PageProps) {
+  const bikes = await getBikes();
   const bike = bikes.find((bike) => bike.slug.split("/")[1] === params.slug);
-
   if (!bike)
     return (
       <div className="flex items-center flex-col gap-4 ">
@@ -33,11 +31,10 @@ const Page: React.FC<PageProps> = ({ params }) => {
       <BikeForm bike={bike} />
     </div>
   );
-};
-
-export default Page;
+}
 
 export async function generateStaticParams() {
+  const bikes = await getBikes();
   return bikes.map((bike) => ({
     slug: bike.slug,
   }));

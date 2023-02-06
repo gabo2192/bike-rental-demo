@@ -11,13 +11,13 @@ export const priceCalculation = (
       rentalPrice = basePrice * duration;
       break;
     case "normal":
-      rentalPrice = basePrice * Math.min(duration, 3);
+      rentalPrice = basePrice;
       if (duration > 3) {
         rentalPrice += (duration - 3) * basePrice;
       }
       break;
     case "old":
-      rentalPrice = basePrice * Math.min(duration, 5);
+      rentalPrice = basePrice;
       if (duration > 5) {
         rentalPrice += (duration - 5) * basePrice;
       }
